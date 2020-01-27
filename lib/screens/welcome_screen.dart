@@ -1,4 +1,4 @@
-import 'package:flash_chat/Widgets/welcome_button.dart';
+import 'package:flash_chat/Widgets/roundbutton.dart';
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
@@ -43,14 +43,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(
               height: 48.0,
             ),
-            WelcomeButton(
+            RoundButton(
               color: Colors.lightBlueAccent,
-              id: LoginScreen.id,
+              onClicked: () {
+                Navigator.pushNamed(context, LoginScreen.id);
+              },
               text: 'Log In',
             ),
-            WelcomeButton(
+            RoundButton(
               color: Colors.blueAccent,
-              id: RegistrationScreen.id,
+              onClicked: () {
+                Navigator.pushNamed(context, RegistrationScreen.id);
+              },
               text: 'Register',
             ),
           ],

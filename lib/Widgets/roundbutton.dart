@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
-class WelcomeButton extends StatelessWidget {
+class RoundButton extends StatelessWidget {
   final Color color;
   final String text;
-  final String id;
+  final Function onClicked;
 
-  WelcomeButton({
-    this.color,
-    this.text,
-    this.id,
-  });
+  RoundButton({this.color, this.text, @required this.onClicked});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +16,7 @@ class WelcomeButton extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(30.0),
         child: MaterialButton(
-          onPressed: () {
-            Navigator.pushNamed(context, id);
-          },
+          onPressed: onClicked,
           minWidth: 200.0,
           height: 42.0,
           child: Text(
