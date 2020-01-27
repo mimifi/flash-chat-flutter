@@ -45,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       //Implement send functionality.
                     },
                     child: Text(
-                      'Send',
+                      'Send test',
                       style: kSendButtonTextStyle,
                     ),
                   ),
