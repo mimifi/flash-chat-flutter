@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "934365312217",
+    "firebase_url": "https://flash-chat-e3d72.firebaseio.com",
+    "project_id": "flash-chat-e3d72",
+    "storage_bucket": "flash-chat-e3d72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934365312217:android:c2d63256f9aa530b6f7ac8",
+        "android_client_info": {
+          "package_name": "co.mimifi.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934365312217-elftiqf9pqqcqii9bu3hnnsr1l3cartc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtU4zQeeTecln4506cJXfLpCwrQh8I0aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934365312217-elftiqf9pqqcqii9bu3hnnsr1l3cartc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
