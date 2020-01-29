@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/Services/auth_service.dart';
 import 'package:flash_chat/Widgets/roundbutton.dart';
-import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+
 import '../constants.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -15,8 +15,8 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   String email;
   String password;
-  FirebaseAuth _fireAuth = FirebaseAuth.instance;
   bool showSpinner = false;
+  AuthService fireAuth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -67,31 +67,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               RoundButton(
-                color: Colors.blueAccent,
-                text: 'Register',
-                onClicked: () async {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  try {
-                    AuthResult registerUser =
-                        await _fireAuth.createUserWithEmailAndPassword(
-                            email: email, password: password);
-                    if (registerUser != null) {
-                      Navigator.pushNamed(context, ChatScreen.id);
-                      setState(() {
-                        showSpinner = false;
-                      });
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-              ),
+                  color: Colors.blueAccent,
+                  text: 'Register',
+                  onClicked: () async {
+                    toggleSpinner();
+                    await fireAuth.registerUser(email, password, context);
+                    toggleSpinner();
+                  }),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void toggleSpinner() {
+    setState(() {
+      showSpinner = !showSpinner;
+    });
   }
 }
