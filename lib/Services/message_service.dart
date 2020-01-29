@@ -10,10 +10,10 @@ class MessageService {
     });
   }
 
-  void messageStream() async {
+  messageStream() async {
     await for (var snapshot in firestore.collection('messages').snapshots()) {
       for (var message in snapshot.documents) {
-        print(message.data);
+        return (message.data);
       }
     }
   }

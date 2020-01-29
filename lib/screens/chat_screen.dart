@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flash_chat/Services/auth_service.dart';
 import 'package:flash_chat/Services/message_service.dart';
 import 'package:flash_chat/constants.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -40,6 +42,35 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+                stream: firestore.collection('messages').snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.lightBlueAccent,
+                      ),
+                    );
+                  }
+                  List<Text> messageWidgets = [];
+                  final messages = snapshot.data.documents;
+                  for (var message in messages) {
+                    final messageText = message.data['text'];
+                    final messageSender = message.data['sender'];
+
+                    final messageWidget = Text(
+                      '$messageText from $messageSender',
+                      style: TextStyle(fontSize: 18.0),
+                    );
+                    messageWidgets.add(messageWidget);
+                  }
+                  return Expanded(
+                    child: ListView(
+                      children: messageWidgets,
+                    ),
+                  );
+                }),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(

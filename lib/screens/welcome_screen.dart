@@ -1,6 +1,5 @@
 import 'package:flash_chat/Widgets/roundbutton.dart';
 import 'package:flutter/material.dart';
-
 import 'login_screen.dart';
 import 'registration_screen.dart';
 
