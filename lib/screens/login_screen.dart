@@ -1,6 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/Services/auth_service.dart';
 import 'package:flash_chat/Widgets/roundbutton.dart';
-import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -15,28 +14,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String email;
   String password;
-  final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
 
-  void signInUser(email, password) async {
-    setState(() {
-      showSpinner = true;
-    });
-    try {
-      AuthResult logInUser = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if (logInUser != null) {
-        Navigator.pushNamed(context, ChatScreen.id);
-      }
-      setState(() {
-        showSpinner = false;
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  AuthService fireAuth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +69,10 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundButton(
                 color: Colors.lightBlueAccent,
                 text: 'Log In',
-                onClicked: () {
-                  signInUser(email, password);
+                onClicked: () async {
+                  toggleSpinner();
+                  await fireAuth.signInUser(email, password, context);
+                  toggleSpinner();
                 },
               ),
             ],
@@ -98,5 +80,11 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void toggleSpinner() {
+    setState(() {
+      showSpinner = !showSpinner;
+    });
   }
 }

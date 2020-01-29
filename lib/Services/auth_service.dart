@@ -21,4 +21,18 @@ class AuthService {
       print(e);
     }
   }
+
+  signInUser(email, password, BuildContext context) async {
+    try {
+      AuthResult logInUser = await fireAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (logInUser != null) {
+        Navigator.pushNamed(context, ChatScreen.id);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }
