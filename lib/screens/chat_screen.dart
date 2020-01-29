@@ -67,6 +67,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   }
                   return Expanded(
                     child: ListView(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.0,
+                        horizontal: 20.0,
+                      ),
                       children: messageWidgets,
                     ),
                   );
