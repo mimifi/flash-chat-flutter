@@ -30,7 +30,6 @@ class _ChatScreenState extends State<ChatScreen> {
               icon: Icon(Icons.close),
               onPressed: () async {
                 await fireAuth.signOut(context);
-                //Implement logout functionality
               }),
         ],
         title: Text('⚡️Chat'),
@@ -60,11 +59,6 @@ class _ChatScreenState extends State<ChatScreen> {
                         messageText,
                         fireAuth.loggedInUser.email,
                       );
-                      /* _firestore.collection('messages').add({
-                        'text': messageText,
-                        'sender': fireAuth.loggedInUser.email,
-                      });*/
-                      //Implement send functionality.
                     },
                     child: Text(
                       'Send test',
