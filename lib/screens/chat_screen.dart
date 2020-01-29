@@ -15,6 +15,7 @@ class _ChatScreenState extends State<ChatScreen> {
   AuthService fireAuth = AuthService();
   String messageText;
   MessageService messageService = MessageService();
+  final messageTextController = TextEditingController();
 
   @override
   void initState() {
@@ -50,6 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: messageTextController,
                       onChanged: (value) {
                         messageText = value;
                       },
@@ -62,6 +64,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         messageText,
                         fireAuth.loggedInUser.email,
                       );
+                      messageTextController.clear();
                     },
                     child: Text(
                       'Send test',
