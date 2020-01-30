@@ -43,11 +43,12 @@ class AuthService {
     Navigator.pop(context, WelcomeScreen.id);
   }
 
-  Future<void> getCurrentUser() async {
+  Future<FirebaseUser> getCurrentUser() async {
     final user = await fireAuth.currentUser();
     try {
       if (user != null) {
         loggedInUser = user;
+        return loggedInUser;
       }
     } catch (e) {
       print(e);

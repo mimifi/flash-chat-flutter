@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/Services/auth_service.dart';
 import 'package:flash_chat/Services/message_service.dart';
 import 'package:flash_chat/Widgets/message_stream.dart';
@@ -19,7 +20,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    fireAuth.getCurrentUser();
+    // fireAuth.getCurrentUser();
   }
 
   @override
@@ -42,7 +43,17 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessageStream(fireAuth.loggedInUser?.email),
+            FutureBuilder(
+                future: fireAuth.getCurrentUser(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<FirebaseUser> snapShot) {
+                  if (snapShot.hasData) {
+                    return MessageStream(snapShot.data.email);
+                  }
+                  return Container();
+                }
+                //MessageStream(fireAuth.loggedInUser),
+                ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(

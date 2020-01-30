@@ -33,6 +33,7 @@ class MessageStream extends StatelessWidget {
           }
           return Expanded(
             child: ListView(
+              reverse: true,
               padding: EdgeInsets.symmetric(
                 vertical: 10.0,
                 horizontal: 20.0,
