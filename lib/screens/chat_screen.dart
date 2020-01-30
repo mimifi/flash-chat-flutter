@@ -12,10 +12,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final messageTextController = TextEditingController();
   AuthService fireAuth = AuthService();
   String messageText;
   MessageService messageService = MessageService();
-  final messageTextController = TextEditingController();
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessageStream(fireAuth.loggedInUser.email),
+            MessageStream(fireAuth.loggedInUser?.email),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -60,14 +60,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   FlatButton(
                     onPressed: () {
+                      messageTextController.clear();
                       messageService.saveMessage(
                         messageText,
                         fireAuth.loggedInUser.email,
                       );
-                      messageTextController.clear();
                     },
                     child: Text(
-                      'Send test',
+                      'Send',
                       style: kSendButtonTextStyle,
                     ),
                   ),
