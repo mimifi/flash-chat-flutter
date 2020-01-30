@@ -43,7 +43,7 @@ class AuthService {
     Navigator.pop(context, WelcomeScreen.id);
   }
 
-  void getCurrentUser() async {
+  Future<void> getCurrentUser() async {
     final user = await fireAuth.currentUser();
     try {
       if (user != null) {
@@ -52,5 +52,6 @@ class AuthService {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 }

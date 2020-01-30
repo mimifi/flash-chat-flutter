@@ -4,6 +4,8 @@ import 'package:flash_chat/Widgets/message_bubble.dart';
 import 'package:flutter/material.dart';
 
 class MessageStream extends StatelessWidget {
+  final String currentUserEmail;
+  MessageStream(this.currentUserEmail);
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -25,6 +27,7 @@ class MessageStream extends StatelessWidget {
             final messageBubble = MessageBubble(
               text: messageText,
               sender: messageSender,
+              isMe: currentUserEmail == messageSender,
             );
             messageBubbles.add(messageBubble);
           }

@@ -43,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessageStream(),
+            MessageStream(fireAuth.loggedInUser.email),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
