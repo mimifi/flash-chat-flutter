@@ -14,7 +14,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
   AuthService fireAuth = AuthService();
-  String messageText;
   MessageService messageService = MessageService();
 
   @override
@@ -52,19 +51,18 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextField(
                       controller: messageTextController,
-                      onChanged: (value) {
-                        messageText = value;
-                      },
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
                   FlatButton(
                     onPressed: () {
-                      messageTextController.clear();
-                      messageService.saveMessage(
-                        messageText,
-                        fireAuth.loggedInUser.email,
-                      );
+                      if (messageTextController.text != '') {
+                        messageService.saveMessage(
+                          messageTextController.text,
+                          fireAuth.loggedInUser.email,
+                        );
+                        messageTextController.clear();
+                      }
                     },
                     child: Text(
                       'Send',

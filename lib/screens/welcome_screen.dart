@@ -36,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     speed: Duration(milliseconds: 500),
                     text: ['Flash Chat'],
                     textStyle: TextStyle(
-                      fontSize: 50.0,
+                      fontSize: 45.0,
                       fontWeight: FontWeight.w900,
                     ),
                     alignment: AlignmentDirectional.topStart,
